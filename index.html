@@ -4,24 +4,268 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AI Travel Planner</title>
+    <title>TravelAI Pro | Smart Business Travel Solutions</title>
     <link rel="stylesheet" href="./style.css" />
     <link rel="icon" href="./airplane-journey.png" type="image/x-icon" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <meta name="description" content="Professional AI-powered travel planning for business and leisure trips. Get personalized itineraries, budget estimates, and recommendations." />
 </head>
 
 <body>
-    <div class="container">
-        <h1 class="fade-in">AI Travel Planner ✈️</h1>
-        <textarea id="travelInput" placeholder="Describe your dream trip..." rows="5"></textarea>
-        <button id="planBtn">Plan My Trip</button>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="./airplane-journey.png" alt="TravelAI Pro Logo" />
+                <span>TravelAI Pro</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#hero" class="active">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#planner" class="cta-btn">Plan Trip</a></li>
+            </ul>
+            <div class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
 
-        <div class="loading" id="loading">Generating your itinerary...</div>
-        <div class="itinerary" id="itinerary"></div>
-        <div class="map-section" id="mapSection"></div>
-        <div class="images-container" id="images"></div>
-    </div>
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="hero-section">
+            <div class="hero-content">
+                <h1>Streamline Your Business Travel with AI</h1>
+                <p>Plan efficient trips, manage expenses, and optimize your travel experience with our AI-powered platform.</p>
+                <a href="#planner" class="btn primary-btn">Get Started <i class="fas fa-arrow-right"></i></a>
+                <a href="#how-it-works" class="btn secondary-btn">Learn More</a>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.pexels.com/photos/7014337/pexels-photo-7014337.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Business Travel" />
+            </div>
+        </section>
 
-    <script src="./javascript.js"></script>
+        <!-- Features Section -->
+        <section id="features" class="features-section">
+            <div class="section-header">
+                <h2>Why Choose TravelAI Pro</h2>
+                <p>Our platform offers powerful tools designed specifically for modern business travelers</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-clock"></i></div>
+                    <h3>Time-Saving</h3>
+                    <p>Generate complete travel plans in seconds, not hours. Focus on your business, not logistics.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-coins"></i></div>
+                    <h3>Cost-Effective</h3>
+                    <p>Budget estimation and currency conversion to help manage travel expenses efficiently.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-map-marked-alt"></i></div>
+                    <h3>Personalized</h3>
+                    <p>Get itineraries tailored to your specific business needs and preferences.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-globe"></i></div>
+                    <h3>Global Coverage</h3>
+                    <p>Plan trips to any destination worldwide with local insights and recommendations.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section id="how-it-works" class="how-it-works-section">
+            <div class="section-header">
+                <h2>How It Works</h2>
+                <p>Three simple steps to plan your perfect business trip</p>
+            </div>
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Describe Your Trip</h3>
+                    <p>Enter your destination, dates, and preferences in the planner form.</p>
+                </div>
+                <div class="step-arrow"><i class="fas fa-arrow-right"></i></div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>AI Processing</h3>
+                    <p>Our AI generates a personalized itinerary with accommodations, activities, and budget.</p>
+                </div>
+                <div class="step-arrow"><i class="fas fa-arrow-right"></i></div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Review & Export</h3>
+                    <p>Review your plan, make adjustments, and export or share it with colleagues.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="testimonials-section">
+            <div class="section-header">
+                <h2>What Our Clients Say</h2>
+                <p>Trusted by business professionals around the world</p>
+            </div>
+            <div class="testimonials-slider">
+                <div class="testimonial">
+                    <div class="testimonial-content">
+                        <p>"TravelAI Pro has revolutionized how our company plans business trips. The itineraries are detailed and the budget estimates are remarkably accurate."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/women/22.jpg" alt="Sarah Johnson" />
+                        <div>
+                            <h4>Sarah Johnson</h4>
+                            <p>Travel Manager, TechCorp Inc.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-content">
+                        <p>"The currency converter and budget estimation features have saved us thousands on international business travel. Highly recommended for any business."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="David Chen" />
+                        <div>
+                            <h4>David Chen</h4>
+                            <p>CFO, Global Solutions Ltd.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-dots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+            </div>
+        </section>
+
+        <!-- Planner Section -->
+        <section id="planner" class="planner-section">
+            <div class="section-header">
+                <h2>Plan Your Business Trip</h2>
+                <p>Get a professional travel itinerary in seconds</p>
+            </div>
+            <div class="planner-container">
+                <div class="input-container">
+                    <h3>Trip Details</h3>
+                    <div class="form-group">
+                        <label for="travelInput">Describe your trip requirements:</label>
+                        <textarea id="travelInput" placeholder="E.g., Business trip to Tokyo for 4 days, meetings in Shinjuku, interested in efficient transportation and local cuisine..." rows="5"></textarea>
+                    </div>
+                    <button id="planBtn" class="btn primary-btn">
+                        <span>Generate Itinerary</span>
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+                <div class="loading" id="loading">
+                    <div class="spinner"></div>
+                    <p>Generating your professional itinerary...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section id="results" class="results-section hide">
+            <div class="itinerary-wrapper">
+                <div class="itinerary-header">
+                    <h2>Your Personalized Itinerary</h2>
+                    <div class="itinerary-actions">
+                        <button id="printBtn" class="btn action-btn">
+                            <i class="fas fa-print"></i> Print
+                        </button>
+                        <button id="shareBtn" class="btn action-btn">
+                            <i class="fas fa-share-alt"></i> Share
+                        </button>
+                        <button id="saveBtn" class="btn action-btn">
+                            <i class="fas fa-save"></i> Save
+                        </button>
+                    </div>
+                </div>
+                <div class="results-container">
+                    <div class="itinerary-content">
+                        <div class="itinerary" id="itinerary"></div>
+                        <div class="currency-converter-wrapper">
+                            <div class="currency-converter">
+                                <h3>Currency Converter</h3>
+                                <div class="converter-box">
+                                    <input type="number" id="sourceAmount" placeholder="Amount" value="100">
+                                    <select id="sourceCurrency"></select>
+                                    <span class="exchange-icon"><i class="fas fa-exchange-alt"></i></span>
+                                    <select id="targetCurrency"></select>
+                                    <div id="convertedAmount">Loading...</div>
+                                    <button id="convertBtn" class="btn">Convert</button>
+                                </div>
+                                <div class="conversion-rate" id="conversionRate"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="side-content">
+                        <div class="map-container">
+                            <h3>Destination Map</h3>
+                            <div class="map-section" id="mapSection"></div>
+                        </div>
+                        <div class="images-container-wrapper">
+                            <h3>Destination Images</h3>
+                            <div class="images-container" id="images"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="./airplane-journey.png" alt="TravelAI Pro Logo" />
+                <span>TravelAI Pro</span>
+            </div>
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Our Team</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#">Business Travel</a></li>
+                        <li><a href="#">Group Bookings</a></li>
+                        <li><a href="#">Travel Consulting</a></li>
+                        <li><a href="#">Corporate Solutions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">GDPR Compliance</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-social">
+                <h4>Connect With Us</h4>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 TravelAI Pro. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="./javascript.js" type="module"></script>
 </body>
 
 </html>
