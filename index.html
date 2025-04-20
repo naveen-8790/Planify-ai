@@ -266,6 +266,54 @@
     </footer>
 
     <script src="./javascript.js" type="module"></script>
+    
+    <!-- API Configuration Modal -->
+    <div id="apiConfigModal" class="api-config-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>API Configuration Guide</h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="config-section">
+                    <h3>Google Gemini API Key</h3>
+                    <p>The TravelAI Pro application requires a Google Gemini API key to generate travel itineraries.</p>
+                    <ol>
+                        <li>Visit the <a href="https://ai.google.dev/" target="_blank">Google AI Studio</a></li>
+                        <li>Create an account or sign in</li>
+                        <li>Navigate to "API Keys" in your account settings</li>
+                        <li>Create a new API key</li>
+                        <li>Copy your API key</li>
+                        <li>Create or edit the <code>.env</code> file in your project root</li>
+                        <li>Add the following line: <code>VITE_GOOGLE_GEMINI_API_KEY=your_api_key_here</code></li>
+                    </ol>
+                </div>
+                <div class="config-section">
+                    <h3>Pexels API Key</h3>
+                    <p>The TravelAI Pro application uses Pexels API to display destination images.</p>
+                    <ol>
+                        <li>Visit <a href="https://www.pexels.com/api/" target="_blank">Pexels API</a></li>
+                        <li>Create an account or sign in</li>
+                        <li>Request an API key</li>
+                        <li>Copy your API key</li>
+                        <li>Add the following line to your <code>.env</code> file: <code>VITE_PIXEL_API_KEY=your_pexels_api_key_here</code></li>
+                    </ol>
+                </div>
+                <div class="config-section">
+                    <h3>Using Environment Variables</h3>
+                    <p>After setting up your <code>.env</code> file:</p>
+                    <ol>
+                        <li>Save the file</li>
+                        <li>Restart your development server (stop and run <code>npm run dev</code> again)</li>
+                        <li>Refresh your browser</li>
+                    </ol>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="closeApiModal" class="btn primary-btn">Got it!</button>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

@@ -1710,3 +1710,145 @@ footer {
         margin-bottom: var(--spacing-xl);
     }
 }
+
+/* API Configuration Modal */
+.api-config-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 2000;
+    overflow-y: auto;
+}
+
+.api-config-modal .modal-content {
+    background-color: var(--card-background);
+    margin: 50px auto;
+    width: 90%;
+    max-width: 800px;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-xl);
+    animation: zoomIn 0.3s;
+    overflow: hidden;
+}
+
+.api-config-modal .modal-header {
+    background-color: var(--secondary-color);
+    color: white;
+    padding: var(--spacing-lg) var(--spacing-xl);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.api-config-modal .modal-header h2 {
+    margin: 0;
+    color: white;
+}
+
+.api-config-modal .close-modal {
+    color: white;
+    font-size: var(--font-size-2xl);
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.api-config-modal .close-modal:hover {
+    transform: scale(1.2);
+}
+
+.api-config-modal .modal-body {
+    padding: var(--spacing-xl);
+}
+
+.api-config-modal .config-section {
+    margin-bottom: var(--spacing-xl);
+    padding-bottom: var(--spacing-xl);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.api-config-modal .config-section:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.api-config-modal .config-section h3 {
+    color: var(--secondary-color);
+    margin-bottom: var(--spacing-md);
+}
+
+.api-config-modal ol {
+    margin-left: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+}
+
+.api-config-modal li {
+    margin-bottom: var(--spacing-sm);
+}
+
+.api-config-modal code {
+    background-color: var(--background-color);
+    padding: 0.2rem 0.4rem;
+    border-radius: var(--border-radius-sm);
+    font-family: monospace;
+    font-size: 0.9em;
+}
+
+.api-config-modal .modal-footer {
+    padding: var(--spacing-md) var(--spacing-xl);
+    background-color: var(--background-color);
+    text-align: right;
+}
+
+/* Additional API warning banner styles */
+.api-warning-banner {
+    background-color: #fff3cd;
+    border: 1px solid #ffeeba;
+    color: #856404;
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius-md);
+    margin-bottom: var(--spacing-xl);
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+}
+
+.api-warning-banner .warning-icon {
+    font-size: var(--font-size-2xl);
+    color: var(--warning-color);
+}
+
+.api-warning-banner h3 {
+    margin-top: 0;
+    margin-bottom: var(--spacing-sm);
+    color: #856404;
+}
+
+.api-warning-banner ul {
+    margin-bottom: var(--spacing-sm);
+    padding-left: var(--spacing-lg);
+}
+
+.api-warning-banner p {
+    margin-bottom: var(--spacing-sm);
+    color: #856404;
+}
+
+.api-warning-banner .config-link {
+    display: inline-block;
+    background-color: var(--warning-color);
+    color: white;
+    padding: var(--spacing-xs) var(--spacing-md);
+    border-radius: var(--border-radius-sm);
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.api-warning-banner .config-link:hover {
+    background-color: var(--accent-dark);
+}

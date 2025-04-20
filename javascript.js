@@ -1,3 +1,5 @@
+import config from './config.js';
+
 const countryCurrencyMap = {
     'usa': { symbol: 'USD', name: 'US Dollar' },
     'united states': { symbol: 'USD', name: 'US Dollar' },
@@ -105,6 +107,12 @@ if (planBtn) {
             return;
         }
         
+        // Check if API keys are valid
+        if (!config.isGeminiKeyValid()) {
+            showNotification('Missing or invalid Gemini API key. Please check your environment variables.', 'error');
+            return;
+        }
+        
         loading.style.display = "flex";
         itineraryEl.innerHTML = "";
         mapSection.innerHTML = "";
@@ -168,7 +176,7 @@ if (planBtn) {
         }`;
         
         try {
-            const response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=" + import.meta.env.VITE_GOOGLE_GEMINI_API_KEY, {
+            const response = await fetch(`${config.geminiEndpoint}?key=${config.geminiApiKey}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -178,7 +186,11 @@ if (planBtn) {
                 }),
             });
             
-            if (!response.ok) throw new Error(`Error: ${response.statusText}`);
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error('API Error response:', errorText);
+                throw new Error(`Error: ${response.statusText} (${response.status})`);
+            }
             
             const data = await response.json();
             const text = data?.candidates?.[0]?.content?.parts?.[0]?.text || "No itinerary found.";
@@ -246,54 +258,62 @@ if (planBtn) {
                     width="100%" height="250" style="border:0;" allowfullscreen loading="lazy">
                 </iframe>`;
             
-            const imageResponse = await fetch(`https://api.pexels.com/v1/search?query=${encodeURIComponent(destination)}+business+travel&per_page=6`, {
-                headers: {
-                    Authorization: import.meta.env.VITE_PIXEL_API_KEY,
-                },
-            });
-            
-            const imgData = await imageResponse.json();
-            
-            // Clear and create images directly in the container
-            imagesSection.innerHTML = '';
-            
-            if (imgData.photos && imgData.photos.length > 0) {
-                imgData.photos.slice(0, 6).forEach(photo => {
-                    const img = document.createElement("img");
-                    img.src = photo.src.medium;
-                    img.alt = `${photo.photographer}'s photo of ${destination}`;
-                    
-                    // Click handler for modal
-                    img.addEventListener('click', () => {
-                        const modal = document.createElement("div");
-                        modal.className = "image-modal";
-                        modal.innerHTML = `
-                            <span class="close-modal">&times;</span>
-                            <img class="modal-content" src="${photo.src.large}" alt="${img.alt}">
-                            <p class="photo-credit">Photo by ${photo.photographer}</p>
-                        `;
-                        document.body.appendChild(modal);
+            if (!config.isPexelsKeyValid()) {
+                imagesSection.innerHTML = '<p>Image loading unavailable. Please check your Pexels API key.</p>';
+            } else {
+                const imageResponse = await fetch(`${config.pexelsEndpoint}?query=${encodeURIComponent(destination)}+business+travel&per_page=6`, {
+                    headers: {
+                        Authorization: config.pixelApiKey,
+                    },
+                });
+                
+                if (!imageResponse.ok) {
+                    throw new Error(`Image API error: ${imageResponse.statusText}`);
+                }
+                
+                const imgData = await imageResponse.json();
+                
+                // Clear and create images directly in the container
+                imagesSection.innerHTML = '';
+                
+                if (imgData.photos && imgData.photos.length > 0) {
+                    imgData.photos.slice(0, 6).forEach(photo => {
+                        const img = document.createElement("img");
+                        img.src = photo.src.medium;
+                        img.alt = `${photo.photographer}'s photo of ${destination}`;
                         
-                        // Close handlers
-                        modal.querySelector('.close-modal').addEventListener('click', () => {
-                            modal.style.opacity = '0';
-                            setTimeout(() => modal.remove(), 300);
-                        });
-                        
-                        modal.addEventListener('click', (e) => {
-                            if (e.target === modal) {
+                        // Click handler for modal
+                        img.addEventListener('click', () => {
+                            const modal = document.createElement("div");
+                            modal.className = "image-modal";
+                            modal.innerHTML = `
+                                <span class="close-modal">&times;</span>
+                                <img class="modal-content" src="${photo.src.large}" alt="${img.alt}">
+                                <p class="photo-credit">Photo by ${photo.photographer}</p>
+                            `;
+                            document.body.appendChild(modal);
+                            
+                            // Close handlers
+                            modal.querySelector('.close-modal').addEventListener('click', () => {
                                 modal.style.opacity = '0';
                                 setTimeout(() => modal.remove(), 300);
-                            }
+                            });
+                            
+                            modal.addEventListener('click', (e) => {
+                                if (e.target === modal) {
+                                    modal.style.opacity = '0';
+                                    setTimeout(() => modal.remove(), 300);
+                                }
+                            });
+                            
+                            setTimeout(() => { modal.style.opacity = '1'; }, 10);
                         });
                         
-                        setTimeout(() => { modal.style.opacity = '1'; }, 10);
+                        imagesSection.appendChild(img);
                     });
-                    
-                    imagesSection.appendChild(img);
-                });
-            } else {
-                imagesSection.innerHTML = '<p>No images found for this destination.</p>';
+                } else {
+                    imagesSection.innerHTML = '<p>No images found for this destination.</p>';
+                }
             }
             
             // Setup action buttons
@@ -302,6 +322,7 @@ if (planBtn) {
         } catch (err) {
             showNotification(err.message, 'error');
             itineraryEl.innerHTML = `<p class="error-message">Error: ${err.message}</p>`;
+            console.error('API Error:', err);
         } finally {
             loading.style.display = "none";
         }
@@ -587,6 +608,66 @@ function initScrollAnimations() {
     document.head.appendChild(animationStyle);
 }
 
+// Check API configuration and show warning if needed
+function checkApiConfiguration() {
+    const configErrors = config.getConfigErrors();
+    
+    if (configErrors.length > 0) {
+        // Add a warning banner to the planner section
+        const plannerSection = document.getElementById('planner');
+        if (plannerSection) {
+            const warningBanner = document.createElement('div');
+            warningBanner.className = 'api-warning-banner';
+            warningBanner.innerHTML = `
+                <div class="warning-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                <div class="warning-content">
+                    <h3>Configuration Issues Detected</h3>
+                    <ul>
+                        ${configErrors.map(error => `<li>${error}</li>`).join('')}
+                    </ul>
+                    <p>The application may not work correctly until these issues are resolved.</p>
+                    <a class="config-link" id="showConfigGuide">
+                        <i class="fas fa-cog"></i> 
+                        Show Configuration Guide
+                    </a>
+                </div>
+            `;
+            
+            plannerSection.querySelector('.section-header').after(warningBanner);
+            
+            // Set up event listener for the configuration guide link
+            document.getElementById('showConfigGuide').addEventListener('click', showApiConfigModal);
+        }
+        
+        // Also log to console
+        console.warn('API Configuration Issues:', configErrors);
+    }
+}
+
+// Show API configuration modal
+function showApiConfigModal() {
+    const modal = document.getElementById('apiConfigModal');
+    if (modal) {
+        modal.style.display = 'block';
+        
+        // Add close handlers
+        modal.querySelector('.close-modal').addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+        
+        document.getElementById('closeApiModal').addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+        
+        // Close on outside click
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    }
+}
+
 // Document ready
 document.addEventListener('DOMContentLoaded', () => {
     addNotificationStyles();
@@ -595,6 +676,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if ('IntersectionObserver' in window) {
         initScrollAnimations();
     }
+    
+    // Check API configuration
+    checkApiConfiguration();
     
     // Highlight active nav item based on scroll position
     window.addEventListener('scroll', () => {
