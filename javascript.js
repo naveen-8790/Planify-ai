@@ -74,7 +74,7 @@ document.getElementById("planBtn").addEventListener("click", async () => {
     }`;
 
     try {
-        const response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyC_xEd0XuZOidZC5ubA6BjRHg71Il07c5w", {
+        const response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=" + process.env.GOOGLE_GEMINI_API_KEY, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -172,7 +172,7 @@ document.getElementById("planBtn").addEventListener("click", async () => {
 
         const imageResponse = await fetch(`https://api.pexels.com/v1/search?query=${encodeURIComponent(destination)}+travel`, {
             headers: {
-                Authorization: "huqTyoO1fEHSb3Jc2yfF9U8V3GpgEAXAu89lcTMjHXGz1xTZlNoBTlyb",
+                Authorization: process.env.PIXEL_API_KEY,
             },
         });
 
