@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Travel Planner</title>
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="icon" href="./airplane-journey.png" type="image/x-icon" />
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="fade-in">AI Travel Planner ✈️</h1>
+        <textarea id="travelInput" placeholder="Describe your dream trip..." rows="5"></textarea>
+        <button id="planBtn">Plan My Trip</button>
+
+        <div class="loading" id="loading">Generating your itinerary...</div>
+        <div class="itinerary" id="itinerary"></div>
+        <div class="map-section" id="mapSection"></div>
+        <div class="images-container" id="images"></div>
+    </div>
+
+    <script src="./javascript.js"></script>
+</body>
+
+</html>
